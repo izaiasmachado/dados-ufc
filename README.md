@@ -15,7 +15,7 @@ Como é um scraper, existe uma latência considerável entre a requisição e a 
 Forma rápida de consultar as ultimas informações publicadas no [Portal de Notícias da UFC](http://www.ufc.br/noticias). Pode ser feita a busca por palavras específicas e ano, conforme o site linkado.
 
 No exemplo a seguir, temos uma busca pela última notícia. A presença da data também é importante, pois podemos selecionar notícias somente do dia atual e realizar o processamento da forma que o desenvolvedor desejar.
-```
+```js
 const ufc = require('dados-ufc')
 
 ufc.news({ 
