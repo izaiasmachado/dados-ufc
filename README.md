@@ -25,8 +25,6 @@ ufc.news({
     search: undefined 
 })
     .then(dados => console.log(dados))
-    .then(dados => console.log(dados))
-    .then(dados => console.log(dados.items))
     // {
     //     items: {
     //         data: [{
