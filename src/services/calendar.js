@@ -11,8 +11,7 @@ async function list () {
   const { window: { lateral } } = new JSDOM(html)
 
   const items = lateral.getElementsByClassName('link')
-  const size = items.length - 1
-  if (size === 0) return []
+  const size = (items.length) ? items.length - 1 : 0
 
   for (let i = 0; i < size; i++) {
     const item = items[i]
