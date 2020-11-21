@@ -1,6 +1,19 @@
 <h1 align="center">Dados UFC</h1>
+
 <p align="center">
-  Busca de dados no site da universidade
+  <a href="https://npm-stat.com/charts.html?package=dados-ufc">
+    <img src="https://img.shields.io/npm/dm/dados-ufc.svg">
+  </a>
+  <a href="https://www.npmjs.com/package/dados-ufc">
+    <img src="https://badge.fury.io/js/dados-ufc.svg">
+  </a>
+  <a href="https://snyk.io/test/github/izaiasmachado/dados-ufc">
+    <img src="https://snyk.io/test/github/izaiasmachado/dados-ufc/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/izaiasmachado/dados-ufc" style="max-width:100%;">
+  </a>
+</p>
+
+<p align="center">
+  Busca de dados no site da Universidade Federal do Ceará
 </p>
 
 ## O que é?
@@ -41,6 +54,84 @@ ufc.news({
     //     limit: 1,
     //     search: undefined
     // }
+```
+
+### Listando Calendários
+Mostra a lista de Calendários Acadêmicos disponíveis no site.
+```js
+const ufc = require('dados-ufc')
+
+ufc.calendar.list()
+    .then(data => console.log(data))
+    // {
+    //     data: [
+    //       {
+    //         id: '2020-ajustes-apos-aprovacao-do-ppe',
+    //         name: '2020 - ajustes após aprovação do PPE',
+    //         link: 'http://www.ufc.br/calendario-universitario/2020-ajustes-apos-aprovacao-do-ppe'
+    //       },
+    //       {
+    //         id: '2020',
+    //         name: '2020',
+    //         link: 'http://www.ufc.br/calendario-universitario/2020'
+    //       },
+    //       {
+    //         id: '2019',
+    //         name: '2019',
+    //         link: 'http://www.ufc.br/calendario-universitario/2019'
+    //       },
+    //       {
+    //         id: '2018',
+    //         name: '2018',
+    //         link: 'http://www.ufc.br/calendario-universitario/2018'
+    //       },
+    //       {
+    //         id: '2017',
+    //         name: '2017',
+    //         link: 'http://www.ufc.br/calendario-universitario/2017'
+    //       },
+    //       {
+    //         id: '2016',
+    //         name: '2016',
+    //         link: 'http://www.ufc.br/calendario-universitario/2016'
+    //       },
+    //       {
+    //         id: '2015-2-ajuste-pos-greve',
+    //         name: '2015.2 - Ajuste Pós-Greve',
+    //         link: 'http://www.ufc.br/calendario-universitario/2015-2-ajuste-pos-greve'
+    //       },
+    //       {
+    //         id: '2015-antes-da-greve',
+    //         name: '2015 - Antes da Greve',
+    //         link: 'http://www.ufc.br/calendario-universitario/2015-antes-da-greve'
+    //       }
+    //     ],
+    //     size: 8
+    //   }
+```
+
+
+## Eventos no calendário
+Já essa função lista os eventos dentro do calendário.
+
+O único filtro passível no momento é o de id. Exemplo `ufc.calendar.show({ id: '2020' })`. Se não for passado nada, será mostrado o último calendário.
+```js
+const ufc = require('dados-ufc')
+
+ufc.calendar.show()
+    .then(data => console.log(data))
+    // {
+    //     id: '2020-ajustes-apos-aprovacao-do-ppe',
+    //     items: {
+    //       data: [{
+    //          name: 'Feriado Municipal em SOBRAL - Aniversário de Sobral',
+    //          date: { start: 2020-01-05T03:00:00.000Z, end: 2020-01-06T02:59:59.999Z }
+    //          }
+    //         ... 161 more items
+    //       ],
+    //       size: 162
+    //     }
+    //   }
 ```
 
 ## Missão

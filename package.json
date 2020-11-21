@@ -1,7 +1,7 @@
 {
   "name": "dados-ufc",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Busca de dados no site da Universidade Federal do Ceará",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,15 +11,16 @@
     "url": "git+https://github.com/izaiasmachado/dados-ufc.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Izaias Machado",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/izaiasmachado/dados-ufc/issues"
   },
   "homepage": "https://github.com/izaiasmachado/dados-ufc#readme",
   "dependencies": {
     "axios": "^0.21.0",
-    "jsdom": "^16.4.0"
+    "jsdom": "^16.4.0",
+    "striptags": "^3.1.1"
   },
   "devDependencies": {
     "eslint": "^7.13.0",
