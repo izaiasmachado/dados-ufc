@@ -1,6 +1,19 @@
 <h1 align="center">Dados UFC</h1>
+
 <p align="center">
-  Busca de dados no site da universidade
+  <a href="https://npm-stat.com/charts.html?package=dados-ufc">
+    <img src="https://img.shields.io/npm/dm/dados-ufc.svg">
+  </a>
+  <a href="https://www.npmjs.com/package/dados-ufc">
+    <img src="https://badge.fury.io/js/dados-ufc.svg">
+  </a>
+  <a href="https://snyk.io/test/github/izaiasmachado/dados-ufc">
+    <img src="https://snyk.io/test/github/izaiasmachado/dados-ufc/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/izaiasmachado/dados-ufc" style="max-width:100%;">
+  </a>
+</p>
+
+<p align="center">
+  Busca de dados no site da Universidade Federal do Ceará
 </p>
 
 ## O que é?
