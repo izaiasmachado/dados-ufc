@@ -3,9 +3,7 @@
   "version": "1.0.1",
   "description": "Busca de dados no site da Universidade Federal do Ceará",
   "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/izaiasmachado/dados-ufc.git"
@@ -17,16 +15,36 @@
     "url": "https://github.com/izaiasmachado/dados-ufc/issues"
   },
   "homepage": "https://github.com/izaiasmachado/dados-ufc#readme",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
   "dependencies": {
     "axios": "^0.21.0",
     "jsdom": "^16.4.0",
     "striptags": "^3.1.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "commitizen": "^4.2.2",
+    "commitlint": "^11.0.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.13.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1"
+    "eslint-plugin-promise": "^4.2.1",
+    "husky": "^4.3.0"
+  },
+  "config": {
+    "commitzen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
