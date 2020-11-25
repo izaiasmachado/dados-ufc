@@ -24,6 +24,36 @@ Criei um módulo ao invés de uma api devido aos custos e possível latência, e
 ## Como usar?
 Como é um scraper, existe uma latência considerável entre a requisição e a resposta do servidor, então usamos o modelo assíncrono (Promise-Based).
 
+### Listando coleções de notícias
+Para mostrar notícias de anos anteriores.
+```js
+const ufc = require('dados-ufc')
+
+ufc.news.list()
+    .then(console.log)
+    // {
+    //     data: [
+    //       {
+    //         id: 'noticias-ufctv',
+    //         name: 'Notícias UFCTV',
+    //         link: 'http://www.ufc.br/noticias/noticias-ufctv'
+    //       },
+    //       {
+    //         id: 'noticias-de-2020',
+    //         name: 'Notícias de 2020',
+    //         link: 'http://www.ufc.br/noticias/noticias-de-2020'
+    //       },
+    //       {
+    //         id: 'noticias-de-2019',
+    //         name: 'Notícias de 2019',
+    //         link: 'http://www.ufc.br/noticias/noticias-de-2019'
+    //       },
+    //       ... 8 more items
+    //     ],
+    //     size: 11
+    // }
+```
+
 ### Buscando notícias
 Forma rápida de consultar as ultimas informações publicadas no [Portal de Notícias da UFC](http://www.ufc.br/noticias). Pode ser feita a busca por palavras específicas e ano, conforme o site linkado.
 
@@ -31,26 +61,21 @@ No exemplo a seguir, temos uma busca pela última notícia. A presença da data 
 ```js
 const ufc = require('dados-ufc')
 
-ufc.news({ 
-    year: undefined, 
-    page: undefined, 
-    limit: 1, 
-    search: undefined 
-})
-    .then(dados => console.log(dados))
+ufc.news.show({ limit: 1 })
+    .then(console.log)
     // {
-    //     items: {
+    //     id: 'noticias-de-2020',
+    //     news: {
     //         data: [{
-    //             id: '15223-ufc-tem-14-professores-entre-os-cientistas-mais-influentes-do-mundo-mostra-estudo-publicado-em-revista-internacional',
-    //             title: 'UFC tem 14 professores entre os cientistas mais influentes do mundo, mostra estudo publicado em revista internacional',
-    //             link: 'http://www.ufc.br/noticias/15223-ufc-tem-14-professores-entre-os-cientistas-mais-influentes-do-mundo-mostra-estudo-publicado-em-revista-internacional',
-    //             date: '2020-11-19'
+    //             id: '15240-inscricoes-para-cursos-de-libras-e-esperanto-seguem-ate-esta-quarta-feira-25-exclusivamente-pela-internet',
+    //             title: 'Inscrições para cursos de Libras e Esperanto seguem até esta quarta-feira (25) exclusivamente pela Internet',
+    //             link: 'http://www.ufc.br/noticias/15240-inscricoes-para-cursos-de-libras-e-esperanto-seguem-ate-esta-quarta-feira-25-exclusivamente-pela-internet',
+    //             date: '2020-11-24'
     //         }],
     //         size: 1
     //     },
     //     page: 0,
-    //     size: 862,
-    //     year: 2020,
+    //     size: 875,
     //     limit: 1,
     //     search: undefined
     // }
@@ -62,7 +87,7 @@ Mostra a lista de Calendários Acadêmicos disponíveis no site.
 const ufc = require('dados-ufc')
 
 ufc.calendar.list()
-    .then(data => console.log(data))
+    .then(console.log)
     // {
     //     data: [
     //       {
@@ -80,58 +105,34 @@ ufc.calendar.list()
     //         name: '2019',
     //         link: 'http://www.ufc.br/calendario-universitario/2019'
     //       },
-    //       {
-    //         id: '2018',
-    //         name: '2018',
-    //         link: 'http://www.ufc.br/calendario-universitario/2018'
-    //       },
-    //       {
-    //         id: '2017',
-    //         name: '2017',
-    //         link: 'http://www.ufc.br/calendario-universitario/2017'
-    //       },
-    //       {
-    //         id: '2016',
-    //         name: '2016',
-    //         link: 'http://www.ufc.br/calendario-universitario/2016'
-    //       },
-    //       {
-    //         id: '2015-2-ajuste-pos-greve',
-    //         name: '2015.2 - Ajuste Pós-Greve',
-    //         link: 'http://www.ufc.br/calendario-universitario/2015-2-ajuste-pos-greve'
-    //       },
-    //       {
-    //         id: '2015-antes-da-greve',
-    //         name: '2015 - Antes da Greve',
-    //         link: 'http://www.ufc.br/calendario-universitario/2015-antes-da-greve'
-    //       }
+    //       ... 5 more items
     //     ],
     //     size: 8
-    //   }
+    // }
 ```
 
 
-## Eventos no calendário
+### Eventos no calendário
 Já essa função lista os eventos dentro do calendário.
 
-O único filtro passível no momento é o de id. Exemplo `ufc.calendar.show({ id: '2020' })`. Se não for passado nada, será mostrado o último calendário.
+O único filtro passível no momento é o de id. Exemplo `ufc.calendar.show({ id: '2020' })` (conforme o exemplo anterior). Se não for passado nada, será mostrado o último calendário.
 ```js
 const ufc = require('dados-ufc')
 
 ufc.calendar.show()
-    .then(data => console.log(data))
+    .then(console.log)
     // {
     //     id: '2020-ajustes-apos-aprovacao-do-ppe',
-    //     items: {
+    //     events: {
     //       data: [{
-    //          name: 'Feriado Municipal em SOBRAL - Aniversário de Sobral',
-    //          date: { start: 2020-01-05T03:00:00.000Z, end: 2020-01-06T02:59:59.999Z }
-    //          }
+    //             name: 'Feriado Municipal em SOBRAL - Aniversário de Sobral',
+    //             date: { start: 2020-01-05T03:00:00.000Z, end: 2020-01-06T02:59:59.999Z }
+    //         }
     //         ... 161 more items
     //       ],
     //       size: 162
     //     }
-    //   }
+    // }
 ```
 
 ## Missão
@@ -145,6 +146,10 @@ Contribuir de forma positiva para o ambiente acadêmico e facilitar o acesso à 
 
 ## Contribuidores
 Qualquer contribuidor será contemplado no arquivo README.md e além disso estará facilitando e muito a vida da comunidade acadêmica.
+
+
+| [<img src="https://avatars1.githubusercontent.com/u/47263002?s=115&u=b023cb850aece85c91b28786cb6608cbded86065&v=4"><br><sub>@matheus3301</sub>](https://github.com/izaiasmachado) |
+| :---: |
 
 ## Autor
 
