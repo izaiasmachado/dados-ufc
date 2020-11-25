@@ -1,63 +1,56 @@
-const { JSDOM } = require('jsdom')
 const striptags = require('striptags')
-const ufc = require('../utils/ufc')
-const { portuguesMonthsNumber } = require('../utils/scripts')
 
+const ufc = require('../utils/ufc')
+const scraper = require('../utils/scraper')
+const { portugueseMonthsNumber } = require('../utils/scripts')
 const url = '/calendario-universitario/'
 
+module.exports = {
+  list,
+  show
+}
+
 async function list () {
-  const data = []
   const { data: html } = await ufc.get(`${url}`)
-  const { window: { lateral } } = new JSDOM(html)
+  const data = await scraper.lateral(html, url)
+  data.pop()
 
-  const items = lateral.getElementsByClassName('link')
-  const size = (items.length) ? items.length - 1 : 0
-
-  for (let i = 0; i < size; i++) {
-    const item = items[i]
-    const { innerHTML: name, href: link } = item
-    const id = link.split(url)[1]
-
-    data.push({ id, name, link })
+  const size = data.length
+  return {
+    data,
+    size
   }
-
-  return { data, size }
 }
 
 async function show (params) {
-  const data = []
   const calendars = await list()
   const id = (params && params.id) ? params.id : calendars.data[0].id
+  const link = url + id
 
-  const { data: html } = await ufc.get(`${url}${id}`)
+  const { data: html } = await ufc.get(link)
   const parsedHtml = html.trim()
-  const { window: { main } } = new JSDOM(parsedHtml)
 
-  const content = main.getElementsByClassName('c-calendarios item-page')[0]
-  const monthAndYears = content.getElementsByTagName('h3')
-  const stripes = content.getElementsByClassName('listras')
-
-  for (let i = 0; i < stripes.length; i++) {
-    const cells = stripes[i].getElementsByClassName('cell')
-
-    for (let j = 0; j < cells.length; j += 2) {
-      const monthAndYear = monthAndYears[i].innerHTML
-      const rawDateStr = cells[j].innerHTML
-      const rawEventName = cells[j + 1].innerHTML
-
-      const name = striptags(rawEventName)
-      const date = parseDate(monthAndYear, rawDateStr)
-
-      data.push({ name, date })
-    }
-  }
-
+  const rawEvents = await scraper.calendar(parsedHtml)
+  const data = await parseEvents(rawEvents)
   const size = data.length
 
   return {
     id,
-    items: { data, size }
+    events: {
+      data,
+      size
+    }
   }
+}
+
+async function parseEvents (events) {
+  return events.map(el => {
+    const { monthAndYear, rawDateStr, rawEventName } = el
+    return {
+      name: striptags(rawEventName),
+      date: parseDate(monthAndYear, rawDateStr)
+    }
+  })
 }
 
 function parseDate (monthAndYear, rawDateStr) {
@@ -80,7 +73,7 @@ function removeNotations (line) {
 
 function parseMonthAndYear (monthAndYear) {
   const parsedStr = monthAndYear.split(' de ')
-  const month = portuguesMonthsNumber(parsedStr[0])
+  const month = portugueseMonthsNumber(parsedStr[0])
   const year = Number(parsedStr[1])
 
   return [month, year]
@@ -125,5 +118,3 @@ function parseToFullDate ({ year, month, day }) {
 
   return { start, end }
 }
-
-module.exports = { list, show }
