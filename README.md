@@ -148,7 +148,7 @@ Contribuir de forma positiva para o ambiente acadêmico e facilitar o acesso à 
 Qualquer contribuidor será contemplado no arquivo README.md e além disso estará facilitando e muito a vida da comunidade acadêmica.
 
 
-| [<img src="https://avatars1.githubusercontent.com/u/47263002?s=115&u=b023cb850aece85c91b28786cb6608cbded86065&v=4"><br><sub>@matheus3301</sub>](https://github.com/izaiasmachado) |
+| [<img src="https://avatars1.githubusercontent.com/u/47263002?s=115&u=b023cb850aece85c91b28786cb6608cbded86065&v=4"><br><sub>@matheus3301</sub>](https://github.com/matheus3301) |
 | :---: |
 
 ## Autor
