@@ -121,12 +121,13 @@ const ufc = require('dados-ufc')
 
 ufc.calendar.show()
     .then(console.log)
-    // {
+    // {  
     //     id: '2020-ajustes-apos-aprovacao-do-ppe',
     //     events: {
     //       data: [{
-    //             name: 'Feriado Municipal em SOBRAL - Aniversário de Sobral',
-    //             date: { start: 2020-01-05T03:00:00.000Z, end: 2020-01-06T02:59:59.999Z }
+    //           summary: 'Feriado Municipal em SOBRAL - Aniversário de Sobral',
+    //           start: { dateTime: 2020-07-05T03:00:00.000Z },
+    //           end: { dateTime: 2020-07-06T02:59:59.999Z }
     //         }
     //         ... 161 more items
     //       ],
