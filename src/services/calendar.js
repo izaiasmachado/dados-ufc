@@ -46,9 +46,12 @@ async function show (params) {
 async function parseEvents (events) {
   return events.map(el => {
     const { monthAndYear, rawDateStr, rawEventName } = el
+    const [start, end] = parseDate(monthAndYear, rawDateStr)
+
     return {
-      name: striptags(rawEventName),
-      date: parseDate(monthAndYear, rawDateStr)
+      summary: striptags(rawEventName),
+      start,
+      end
     }
   })
 }
@@ -57,9 +60,8 @@ function parseDate (monthAndYear, rawDateStr) {
   const dateStr = removeNotations(rawDateStr)
   const [month, year] = parseMonthAndYear(monthAndYear)
   const day = parseDateStr(dateStr)
-  const date = parseToFullDate({ month, year, day })
-
-  return date
+  const [start, end] = parseToFullDate({ month, year, day })
+  return [start, end]
 }
 
 function removeNotations (line) {
@@ -96,25 +98,35 @@ function parseDateStr (dateStr) {
 }
 
 function parseToFullDate ({ year, month, day }) {
-  const start = new Date('0000-00-00')
-  const end = new Date('0000-00-00')
+  const startDateTime = new Date()
+  const endDateTime = new Date()
 
-  start.setMonth(month)
-  start.setFullYear(year)
+  startDateTime.setHours(0, 0, 0, 0)
+  startDateTime.setMonth(month)
+  startDateTime.setFullYear(year)
 
-  end.setMonth(month)
-  end.setFullYear(year)
+  endDateTime.setHours(0, 0, 0, 0)
+  endDateTime.setMonth(month)
+  endDateTime.setFullYear(year)
 
   if (typeof day === 'number') {
-    start.setDate(day)
-    end.setDate(day)
+    startDateTime.setDate(day)
+    endDateTime.setDate(day)
   } else {
-    start.setDate(day[0])
-    end.setDate(day[1])
+    startDateTime.setDate(day[0])
+    endDateTime.setDate(day[1])
   }
 
-  end.setDate(end.getDate() + 1)
-  end.setMilliseconds(end.getMilliseconds() - 1)
+  endDateTime.setDate(endDateTime.getDate() + 1)
+  endDateTime.setMilliseconds(endDateTime.getMilliseconds() - 1)
 
-  return { start, end }
+  const start = {
+    dateTime: startDateTime
+  }
+
+  const end = {
+    dateTime: endDateTime
+  }
+
+  return [start, end]
 }
