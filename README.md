@@ -136,6 +136,41 @@ ufc.calendar.show()
     // }
 ```
 
+### Listar pendências na biblioteca
+```js
+const ufc = require('dados-ufc')
+
+ufc.pergamum.pendencies('login', 'password')
+    .then(console.log)
+    // [
+    //   {
+    //     name: 'Algoritmos : teoria e prática / 2002',
+    //     returnDate: '07/12/2021',
+    //     renewsNumber: '1'
+    //   },
+    //   {
+    //     name: 'Curso de física básica - 3. ed. / 1996',
+    //     returnDate: '07/12/2021',
+    //     renewsNumber: '0'
+    //   }
+    // ]
+
+```
+
+### Listar reservas na biblioteca
+```js
+const ufc = require('dados-ufc')
+
+ufc.pergamum.reservations('login', 'password')
+    .then(console.log)
+    // [
+    //   {
+    //     name: 'Algoritmos : teoria e prática / 2002',
+    //     status: 'Avaliando'
+    //   }
+    // ]
+```
+
 ## Missão
 Contribuir de forma positiva para o ambiente acadêmico e facilitar o acesso à informação.
 
