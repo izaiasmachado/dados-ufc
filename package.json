@@ -3,7 +3,8 @@
   "version": "1.0.2",
   "description": "Busca de dados no site da Universidade Federal do Ceará",
   "main": "src/index.js",
-  "scripts": {},
+  "scripts": {
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/izaiasmachado/dados-ufc.git"
@@ -23,6 +24,7 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "form-data": "^4.0.0",
     "jsdom": "^16.4.0",
     "striptags": "^3.1.1"
   },
@@ -32,12 +34,13 @@
     "commitizen": "^4.2.2",
     "commitlint": "^11.0.0",
     "cz-conventional-changelog": "^3.3.0",
+    "dotenv": "^10.0.0",
     "eslint": "^7.13.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "husky": "^4.3.0"
+    "husky": "^7.0.4"
   },
   "config": {
     "commitzen": {
