@@ -1,6 +1,6 @@
 {
   "name": "dados-ufc",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Busca de dados no site da Universidade Federal do Ceará",
   "main": "src/index.js",
   "scripts": {},
