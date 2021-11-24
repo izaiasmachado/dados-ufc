@@ -121,18 +121,54 @@ const ufc = require('dados-ufc')
 
 ufc.calendar.show()
     .then(console.log)
-    // {
+    // {  
     //     id: '2020-ajustes-apos-aprovacao-do-ppe',
     //     events: {
     //       data: [{
-    //             name: 'Feriado Municipal em SOBRAL - Aniversário de Sobral',
-    //             date: { start: 2020-01-05T03:00:00.000Z, end: 2020-01-06T02:59:59.999Z }
+    //           summary: 'Feriado Municipal em SOBRAL - Aniversário de Sobral',
+    //           start: { dateTime: 2020-07-05T03:00:00.000Z },
+    //           end: { dateTime: 2020-07-06T02:59:59.999Z }
     //         }
     //         ... 161 more items
     //       ],
     //       size: 162
     //     }
     // }
+```
+
+### Listar pendências na biblioteca
+```js
+const ufc = require('dados-ufc')
+
+ufc.pergamum.pendencies('login', 'password')
+    .then(console.log)
+    // [
+    //   {
+    //     name: 'Algoritmos : teoria e prática / 2002',
+    //     returnDate: '07/12/2021',
+    //     renewsNumber: '1'
+    //   },
+    //   {
+    //     name: 'Curso de física básica - 3. ed. / 1996',
+    //     returnDate: '07/12/2021',
+    //     renewsNumber: '0'
+    //   }
+    // ]
+
+```
+
+### Listar reservas na biblioteca
+```js
+const ufc = require('dados-ufc')
+
+ufc.pergamum.reservations('login', 'password')
+    .then(console.log)
+    // [
+    //   {
+    //     name: 'Algoritmos : teoria e prática / 2002',
+    //     status: 'Avaliando'
+    //   }
+    // ]
 ```
 
 ## Missão
